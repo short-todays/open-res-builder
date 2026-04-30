@@ -6,7 +6,7 @@ export default function PersonalInfoForm() {
   const { personal } = resume;
 
   const handleChange = (field: string, value: string) => {
-    setPersonalInfo({ [field]: value } as any);
+    setPersonalInfo({ [field]: value } as Record<string, string>);
   };
 
   return (

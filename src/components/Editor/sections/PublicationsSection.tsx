@@ -28,7 +28,7 @@ export default function PublicationsSection({ sectionId }: PublicationsSectionPr
   };
 
   const handleUpdateField = (itemId: string, field: string, value: string) => {
-    updateItem(sectionId, itemId, { [field]: value } as any);
+    updateItem(sectionId, itemId, { [field]: value } as Record<string, string>);
   };
 
   return (
