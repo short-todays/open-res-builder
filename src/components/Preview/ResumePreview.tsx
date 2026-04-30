@@ -144,7 +144,7 @@ export default function ResumePreview() {
     .join(' | ');
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden bg-gray-50 dark:bg-slate-800">
       <div className="flex-1 overflow-y-auto">
         <div className="bg-white p-12 min-h-full max-w-4xl mx-auto font-sans" id="resume-preview">
           {/* Header */}

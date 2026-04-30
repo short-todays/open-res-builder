@@ -32,19 +32,19 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Header */}
-      <div className="px-5 py-4 border-b border-gray-100">
+      <div className="px-5 py-4 border-b border-gray-100 dark:border-slate-700">
         <div>
-          <h4 className="font-semibold text-gray-900">{section.title}</h4>
-          <p className="text-xs text-gray-500 mt-0.5">{section.items.length} {section.items.length === 1 ? 'group' : 'groups'}</p>
+          <h4 className="font-semibold text-gray-900 dark:text-white">{section.title}</h4>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{section.items.length} {section.items.length === 1 ? 'group' : 'groups'}</p>
         </div>
       </div>
 
       {/* Items Container */}
       <div className="px-5 py-4 space-y-3 flex-1 overflow-y-auto">
         {section.items.map((item: any) => (
-          <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors">
+          <div key={item.id} className="border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden hover:border-gray-300 dark:hover:border-slate-600 transition-colors">
             {expandedId === item.id ? (
-              <div className="p-4 space-y-4 bg-blue-50">
+              <div className="p-4 space-y-4 bg-blue-50 dark:bg-blue-900/20">
                 <TextField
                   label="Category"
                   placeholder="Languages"
@@ -67,7 +67,7 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
                   </button>
                   <button
                     onClick={() => removeItem(sectionId, item.id)}
-                    className="px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
+                    className="px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors"
                   >
                     ✕
                   </button>
@@ -76,13 +76,13 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
             ) : (
               <div
                 onClick={() => setExpandedId(item.id)}
-                className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
+                className="p-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
               >
-                <p className="font-medium text-gray-900 text-sm">
+                <p className="font-medium text-gray-900 dark:text-white text-sm">
                   {(item.category as string) || '(No category)'}
                 </p>
                 {item.items && (
-                  <p className="text-xs text-gray-500 mt-1.5 truncate">{item.items}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 truncate">{item.items}</p>
                 )}
               </div>
             )}
@@ -91,10 +91,10 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
       </div>
 
       {/* Add Button */}
-      <div className="px-5 py-3 border-t border-gray-100">
+      <div className="px-5 py-3 border-t border-gray-100 dark:border-slate-700">
         <button
           onClick={handleAddItem}
-          className="w-full py-2.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors"
+          className="w-full py-2.5 text-sm font-medium text-blue-600 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors"
         >
           + Add Skill Category
         </button>

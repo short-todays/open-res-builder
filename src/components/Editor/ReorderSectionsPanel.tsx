@@ -53,7 +53,7 @@ export default function ReorderSectionsPanel() {
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 text-left text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors flex items-center justify-between"
+        className="w-full px-4 py-3 text-left text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-700 rounded-lg transition-colors flex items-center justify-between"
       >
         <span className="flex items-center gap-2">
           <span className="text-lg">⋮⋮</span>
@@ -66,14 +66,14 @@ export default function ReorderSectionsPanel() {
 
       {/* Reorder Panel */}
       {isOpen && (
-        <div className="mt-3 bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <div className="mt-3 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
             <SortableContext items={sections.map((s) => s.id)} strategy={verticalListSortingStrategy}>
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-gray-100 dark:divide-slate-700">
                 {sections.map((section, index) => (
                   <SortableSectionItem
                     key={section.id}
@@ -87,7 +87,7 @@ export default function ReorderSectionsPanel() {
           </DndContext>
 
           {/* Footer Info */}
-          <div className="px-4 py-3 bg-gray-50 border-t border-gray-100 text-xs text-gray-500">
+          <div className="px-4 py-3 bg-gray-50 dark:bg-slate-700 border-t border-gray-100 dark:border-slate-700 text-xs text-gray-500 dark:text-gray-400">
             Drag sections to reorder them
           </div>
         </div>

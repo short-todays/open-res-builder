@@ -1,4 +1,5 @@
 import { useResumeStore } from '../store/resumeStore';
+import ThemeToggle from './ThemeToggle';
 
 export default function Header() {
   const { resetResume } = useResumeStore();
@@ -14,13 +15,14 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+    <header className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700 px-6 py-4 flex items-center justify-between">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Resume Builder</h1>
-        <p className="text-sm text-gray-500">ATS-Friendly • Real-time Preview</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Resume Builder</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400">ATS-Friendly • Real-time Preview</p>
       </div>
 
       <div className="flex items-center gap-3">
+        <ThemeToggle />
         <button
           onClick={handleDownloadPDF}
           className="btn-primary"
