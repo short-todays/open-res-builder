@@ -45,25 +45,22 @@ export default function SectionManager() {
     <div className="space-y-4">
       {/* Current Sections */}
       {sections.length > 0 && (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {sections.map((section) => {
             const Component = sectionComponents[section.id];
             return (
-              <div key={section.id}>
-                {Component && (
+              <div key={section.id} className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                {Component ? (
                   <Component sectionId={section.id} />
-                )}
-                {!Component && (
-                  <div className="p-3 bg-gray-100 rounded border border-gray-300">
-                    <div className="flex items-center justify-between">
-                      <p className="font-medium text-gray-900">{section.title}</p>
-                      <button
-                        onClick={() => removeSection(section.id)}
-                        className="btn-secondary btn-sm"
-                      >
-                        Remove
-                      </button>
-                    </div>
+                ) : (
+                  <div className="flex items-center justify-between p-5 border-b border-gray-100">
+                    <p className="font-medium text-gray-900">{section.title}</p>
+                    <button
+                      onClick={() => removeSection(section.id)}
+                      className="px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
+                    >
+                      ✕ Remove
+                    </button>
                   </div>
                 )}
               </div>
@@ -74,14 +71,14 @@ export default function SectionManager() {
 
       {/* Add Section */}
       {availableSections.length > 0 && (
-        <div>
-          <h4 className="text-sm font-medium text-gray-600 mb-3">Add Section</h4>
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+          <h4 className="text-sm font-semibold text-gray-900 mb-3">Add Section</h4>
           <div className="grid grid-cols-2 gap-2">
             {availableSections.map((section) => (
               <button
                 key={section.id}
                 onClick={() => handleAddSection(section.id)}
-                className="px-3 py-2 bg-white border border-primary-300 text-primary-600 rounded-lg text-sm font-medium hover:bg-primary-50 transition-colors"
+                className="px-3 py-2.5 bg-blue-50 border border-blue-200 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 hover:border-blue-300 transition-colors duration-200"
               >
                 + {section.title}
               </button>
@@ -91,7 +88,9 @@ export default function SectionManager() {
       )}
 
       {sections.length === 0 && availableSections.length === 0 && (
-        <p className="text-sm text-gray-500 text-center py-4">All sections added</p>
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 text-center">
+          <p className="text-sm text-gray-500">All sections added</p>
+        </div>
       )}
     </div>
   );

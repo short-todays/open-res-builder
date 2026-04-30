@@ -8,18 +8,18 @@ export default function ResumePreview() {
     // Experience
     if (section.id === 'experience') {
       return (
-        <div key={item.id} className="mb-4">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="font-semibold text-gray-900">{item.company}</p>
-              <p className="text-gray-700">{item.position}</p>
-            </div>
-            <p className="text-gray-600 text-xs whitespace-nowrap ml-4">
+        <div key={item.id} className="mb-5">
+          <div className="mb-1">
+            <p className="font-bold text-black">{item.company}</p>
+            <p className="text-black">{item.position}</p>
+          </div>
+          {(item.startDate || item.endDate) && (
+            <p className="text-black text-sm mb-2">
               {item.startDate} {item.endDate ? `- ${item.endDate}` : ''}
             </p>
-          </div>
+          )}
           {item.description && (
-            <p className="text-gray-600 text-sm mt-1 whitespace-pre-wrap">{item.description}</p>
+            <p className="text-black text-sm leading-relaxed whitespace-pre-wrap">{item.description}</p>
           )}
         </div>
       );
@@ -28,15 +28,17 @@ export default function ResumePreview() {
     // Projects
     if (section.id === 'projects') {
       return (
-        <div key={item.id} className="mb-4">
-          <p className="font-semibold text-gray-900">{item.name}</p>
-          {item.description && (
-            <p className="text-gray-600 text-sm mt-1">{item.description}</p>
-          )}
+        <div key={item.id} className="mb-5">
+          <div className="mb-1">
+            <p className="font-bold text-black">{item.name}</p>
+          </div>
           {item.technologies && (
-            <p className="text-gray-600 text-xs mt-1">
-              <strong>Technologies:</strong> {item.technologies}
+            <p className="text-black text-sm mb-2">
+              Technologies: {item.technologies}
             </p>
+          )}
+          {item.description && (
+            <p className="text-black text-sm leading-relaxed">{item.description}</p>
           )}
         </div>
       );
@@ -45,21 +47,19 @@ export default function ResumePreview() {
     // Education
     if (section.id === 'education') {
       return (
-        <div key={item.id} className="mb-4">
-          <div className="flex justify-between items-start">
-            <div>
-              <p className="font-semibold text-gray-900">{item.school}</p>
-              <p className="text-gray-700">{item.degree}</p>
-              {item.field && (
-                <p className="text-gray-600 text-sm">{item.field}</p>
-              )}
-            </div>
-            {item.graduationDate && (
-              <p className="text-gray-600 text-xs whitespace-nowrap ml-4">
-                {item.graduationDate}
-              </p>
-            )}
+        <div key={item.id} className="mb-5">
+          <div className="mb-1">
+            <p className="font-bold text-black">{item.school}</p>
+            <p className="text-black">{item.degree}</p>
           </div>
+          {item.field && (
+            <p className="text-black text-sm mb-2">{item.field}</p>
+          )}
+          {item.graduationDate && (
+            <p className="text-black text-sm">
+              Graduation: {item.graduationDate}
+            </p>
+          )}
         </div>
       );
     }
@@ -68,8 +68,8 @@ export default function ResumePreview() {
     if (section.id === 'skills') {
       return (
         <div key={item.id} className="mb-3">
-          <p className="font-semibold text-gray-900">{item.category}</p>
-          <p className="text-gray-700 text-sm">{item.items}</p>
+          <p className="font-bold text-black">{item.category}</p>
+          <p className="text-black text-sm">{item.items}</p>
         </div>
       );
     }
@@ -77,13 +77,15 @@ export default function ResumePreview() {
     // Certifications
     if (section.id === 'certifications') {
       return (
-        <div key={item.id} className="mb-3">
-          <p className="font-semibold text-gray-900">{item.name}</p>
+        <div key={item.id} className="mb-4">
+          <p className="font-bold text-black">{item.name}</p>
           {item.issuer && (
-            <p className="text-gray-700 text-sm">{item.issuer}</p>
+            <p className="text-black text-sm">{item.issuer}</p>
           )}
           {item.date && (
-            <p className="text-gray-600 text-xs">{item.date}</p>
+            <p className="text-black text-sm">
+              {item.date}
+            </p>
           )}
         </div>
       );
@@ -92,10 +94,10 @@ export default function ResumePreview() {
     // Achievements
     if (section.id === 'achievements') {
       return (
-        <div key={item.id} className="mb-3">
-          <p className="font-semibold text-gray-900">{item.title}</p>
+        <div key={item.id} className="mb-4">
+          <p className="font-bold text-black">{item.title}</p>
           {item.description && (
-            <p className="text-gray-600 text-sm mt-1">{item.description}</p>
+            <p className="text-black text-sm leading-relaxed mt-1">{item.description}</p>
           )}
         </div>
       );
@@ -104,13 +106,15 @@ export default function ResumePreview() {
     // Publications
     if (section.id === 'publications') {
       return (
-        <div key={item.id} className="mb-3">
-          <p className="font-semibold text-gray-900">{item.title}</p>
+        <div key={item.id} className="mb-4">
+          <p className="font-bold text-black">{item.title}</p>
           {item.publisher && (
-            <p className="text-gray-700 text-sm">{item.publisher}</p>
+            <p className="text-black text-sm">{item.publisher}</p>
           )}
           {item.date && (
-            <p className="text-gray-600 text-xs">{item.date}</p>
+            <p className="text-black text-sm">
+              {item.date}
+            </p>
           )}
         </div>
       );
@@ -122,7 +126,7 @@ export default function ResumePreview() {
         {Object.entries(item)
           .filter(([key, value]) => key !== 'id' && value)
           .map(([key, value]) => (
-            <p key={key} className="text-sm text-gray-700">
+            <p key={key} className="text-sm text-black mb-1">
               <strong>{key}:</strong> {String(value)}
             </p>
           ))}
@@ -130,31 +134,34 @@ export default function ResumePreview() {
     );
   };
 
+  // Format contact info as pipe-separated line
+  const contactInfo = [
+    personal.email,
+    personal.phone,
+    personal.location,
+  ]
+    .filter(Boolean)
+    .join(' | ');
+
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <div className="flex-1 overflow-y-auto">
-        <div className="bg-white p-8 min-h-full max-w-4xl mx-auto" id="resume-preview">
+        <div className="bg-white p-12 min-h-full max-w-4xl mx-auto font-sans" id="resume-preview">
           {/* Header */}
-          <header className="mb-6 pb-6 border-b-2 border-gray-300">
-            <h1 className="text-3xl font-bold text-gray-900">{personal.name || 'Your Name'}</h1>
-            <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-700">
-              {personal.email && (
-                <span>{personal.email}</span>
-              )}
-              {personal.phone && (
-                <span>{personal.phone}</span>
-              )}
-              {personal.location && (
-                <span>{personal.location}</span>
-              )}
-            </div>
+          <header className="mb-6 pb-4 border-b border-black">
+            <h1 className="text-3xl font-bold text-black mb-1">{personal.name || 'Your Name'}</h1>
+            {contactInfo && (
+              <p className="text-black text-sm leading-relaxed">{contactInfo}</p>
+            )}
           </header>
 
           {/* Summary */}
           {summary && (
             <section className="mb-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-2">Professional Summary</h2>
-              <p className="text-gray-700 text-sm leading-relaxed">{summary}</p>
+              <h2 className="text-sm font-bold text-black uppercase mb-2 pb-1 border-b border-black">
+                Professional Summary
+              </h2>
+              <p className="text-black text-sm leading-relaxed">{summary}</p>
             </section>
           )}
 
@@ -163,8 +170,10 @@ export default function ResumePreview() {
             .filter((section) => section.visible && section.items.length > 0)
             .map((section) => (
               <section key={section.id} className="mb-6">
-                <h2 className="text-lg font-bold text-gray-900 mb-3">{section.title}</h2>
-                <div>
+                <h2 className="text-sm font-bold text-black uppercase mb-3 pb-1 border-b border-black">
+                  {section.title}
+                </h2>
+                <div className="ml-0">
                   {(section.items as any[]).map((item) => renderSectionItem(section, item))}
                 </div>
               </section>

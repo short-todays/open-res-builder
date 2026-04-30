@@ -12,7 +12,7 @@ export default function SummaryForm() {
       onChange={setSummary}
       multiline
       rows={4}
-      helperText="2-3 sentences highlighting your key qualifications and what you're looking for"
+      helperText="Write 2–3 lines about your skills and career goals"
     />
   );
 }

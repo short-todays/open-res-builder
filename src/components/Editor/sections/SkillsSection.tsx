@@ -30,20 +30,21 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
   };
 
   return (
-    <div className="space-y-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
-      <div className="flex items-center justify-between">
-        <h4 className="font-medium text-gray-900">{section.title}</h4>
-        <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">
-          {section.items.length} groups
-        </span>
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="px-5 py-4 border-b border-gray-100">
+        <div>
+          <h4 className="font-semibold text-gray-900">{section.title}</h4>
+          <p className="text-xs text-gray-500 mt-0.5">{section.items.length} {section.items.length === 1 ? 'group' : 'groups'}</p>
+        </div>
       </div>
 
-      {/* Items */}
-      <div className="space-y-2">
+      {/* Items Container */}
+      <div className="px-5 py-4 space-y-3 flex-1 overflow-y-auto">
         {section.items.map((item: any) => (
-          <div key={item.id} className="bg-white p-3 rounded border border-gray-300">
+          <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:border-gray-300 transition-colors">
             {expandedId === item.id ? (
-              <div className="space-y-3">
+              <div className="p-4 space-y-4 bg-blue-50">
                 <TextField
                   label="Category"
                   placeholder="Languages"
@@ -57,29 +58,31 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
                   onChange={(value: string) => handleUpdateField(item.id, 'items', value)}
                   helperText="Comma-separated list"
                 />
-                <div className="flex gap-2">
+                <div className="flex gap-2 pt-2">
                   <button
                     onClick={() => setExpandedId(null)}
-                    className="btn-secondary btn-sm"
+                    className="flex-1 px-3 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                   >
                     Done
                   </button>
                   <button
                     onClick={() => removeItem(sectionId, item.id)}
-                    className="btn-secondary btn-sm text-red-600"
+                    className="px-3 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors"
                   >
-                    Delete
+                    ✕
                   </button>
                 </div>
               </div>
             ) : (
               <div
                 onClick={() => setExpandedId(item.id)}
-                className="cursor-pointer space-y-1 hover:bg-gray-50"
+                className="p-4 cursor-pointer hover:bg-gray-50 transition-colors"
               >
-                <p className="font-medium text-gray-900">{(item.category as string) || 'Skills'}</p>
+                <p className="font-medium text-gray-900 text-sm">
+                  {(item.category as string) || '(No category)'}
+                </p>
                 {item.items && (
-                  <p className="text-xs text-gray-500 truncate">{item.items}</p>
+                  <p className="text-xs text-gray-500 mt-1.5 truncate">{item.items}</p>
                 )}
               </div>
             )}
@@ -88,12 +91,14 @@ export default function SkillsSection({ sectionId }: SkillsSectionProps) {
       </div>
 
       {/* Add Button */}
-      <button
-        onClick={handleAddItem}
-        className="w-full py-2 text-sm text-primary-600 border border-primary-300 rounded-lg hover:bg-primary-50 transition-colors"
-      >
-        + Add Skill Category
-      </button>
+      <div className="px-5 py-3 border-t border-gray-100">
+        <button
+          onClick={handleAddItem}
+          className="w-full py-2.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors"
+        >
+          + Add Skill Category
+        </button>
+      </div>
     </div>
   );
 }

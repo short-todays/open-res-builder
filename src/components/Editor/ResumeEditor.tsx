@@ -1,37 +1,61 @@
 import PersonalInfoForm from './PersonalInfoForm';
+import ReorderSectionsPanel from './ReorderSectionsPanel';
 import SectionManager from './SectionManager';
 import SummaryForm from './SummaryForm';
 
 export default function ResumeEditor() {
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden bg-white">
+      {/* Header */}
+      <div className="sticky top-0 z-10 border-b border-gray-200 bg-white">
+        <div className="px-6 py-4">
+          <h1 className="text-xl font-bold text-gray-900">Resume Builder</h1>
+          <p className="text-sm text-gray-500 mt-1">Fill in your information to create your resume</p>
+        </div>
+      </div>
+
+      {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto">
-        <div className="p-6 max-w-2xl">
-          <h2 className="text-lg font-semibold text-gray-900 mb-6">Resume Editor</h2>
+        <div className="px-6 py-6 max-w-2xl space-y-6">
 
-          {/* Personal Info Section */}
-          <section className="mb-8">
-            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
-              Personal Information
-            </h3>
-            <PersonalInfoForm />
-          </section>
+          {/* Personal Information Card */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="px-5 py-4 border-b border-gray-100">
+              <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                <span className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xs font-bold">👤</span>
+                Personal Information
+              </h2>
+            </div>
+            <div className="px-5 py-4">
+              <PersonalInfoForm />
+            </div>
+          </div>
 
-          {/* Summary Section */}
-          <section className="mb-8">
-            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
-              Professional Summary
-            </h3>
-            <SummaryForm />
-          </section>
+          {/* Professional Summary Card */}
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div className="px-5 py-4 border-b border-gray-100">
+              <h2 className="text-base font-semibold text-gray-900 flex items-center gap-2">
+                <span className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-xs font-bold">✓</span>
+                Professional Summary
+              </h2>
+            </div>
+            <div className="px-5 py-4">
+              <SummaryForm />
+            </div>
+          </div>
 
           {/* Dynamic Sections */}
-          <section>
-            <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
+          <div>
+            <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center gap-2 px-1">
+              <span className="w-5 h-5 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 text-xs font-bold">+</span>
               Resume Sections
-            </h3>
+            </h2>
+            <ReorderSectionsPanel />
             <SectionManager />
-          </section>
+          </div>
+
+          {/* Bottom Padding */}
+          <div className="h-4" />
         </div>
       </div>
     </div>
