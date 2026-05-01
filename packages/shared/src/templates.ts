@@ -1,4 +1,4 @@
-import type { SectionItem } from './index';
+import type { SectionItem } from './types';
 
 export interface ResumeTemplate {
   id: string;

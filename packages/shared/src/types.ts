@@ -52,22 +52,11 @@ export const SECTION_DEFINITIONS = {
   achievements: {
     id: 'achievements',
     title: 'Achievements',
-    fields: ['title', 'description'],
+    fields: ['title', 'description', 'date'],
   },
   publications: {
     id: 'publications',
     title: 'Publications',
     fields: ['title', 'publisher', 'date', 'url'],
   },
-};
-
-export const DEFAULT_RESUME: Resume = {
-  personal: {
-    name: '',
-    email: '',
-    phone: '',
-    location: '',
-  },
-  summary: '',
-  sections: [],
-};
+} as const;
