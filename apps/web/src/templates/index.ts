@@ -1,4 +1,4 @@
-import type { ResumeTemplate } from '../types/templates';
+import type { ResumeTemplate } from '@open-resume-builder/shared/templates';
 
 // Modern Template - Clean, contemporary design
 export const modernTemplate: ResumeTemplate = {

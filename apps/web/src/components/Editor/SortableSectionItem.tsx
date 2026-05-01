@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import type { ResumeSection } from '../../types';
+import type { ResumeSection } from '@open-resume-builder/shared/types';
 
 interface SortableSectionItemProps {
   section: ResumeSection;

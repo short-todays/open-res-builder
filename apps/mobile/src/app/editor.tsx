@@ -1,10 +1,8 @@
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
 import { Button, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function EditorScreen() {
   const router = useRouter();
-  const [name, setName] = useState('');
 
   return (
     <ScrollView style={styles.container}>

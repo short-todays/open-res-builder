@@ -13,6 +13,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import type { ResumeSection } from '@open-resume-builder/shared/types';
 import { useState } from 'react';
 import { useResumeStore } from '../../store/resumeStore';
 import SortableSectionItem from './SortableSectionItem';
@@ -37,8 +38,8 @@ export default function ReorderSectionsPanel() {
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
-      const oldIndex = sections.findIndex((s) => s.id === active.id);
-      const newIndex = sections.findIndex((s) => s.id === over.id);
+      const oldIndex = sections.findIndex((s: ResumeSection) => s.id === active.id);
+      const newIndex = sections.findIndex((s: ResumeSection) => s.id === over.id);
       const newOrder = arrayMove(sections, oldIndex, newIndex);
       reorderSections(newOrder);
     }
@@ -72,9 +73,9 @@ export default function ReorderSectionsPanel() {
             collisionDetection={closestCenter}
             onDragEnd={handleDragEnd}
           >
-            <SortableContext items={sections.map((s) => s.id)} strategy={verticalListSortingStrategy}>
+            <SortableContext items={sections.map((s: ResumeSection) => s.id)} strategy={verticalListSortingStrategy}>
               <div className="divide-y divide-gray-100 dark:divide-slate-700">
-                {sections.map((section, index) => (
+                {sections.map((section: ResumeSection, index: number) => (
                   <SortableSectionItem
                     key={section.id}
                     section={section}

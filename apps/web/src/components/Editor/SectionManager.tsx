@@ -1,6 +1,6 @@
+import type { ResumeSection } from '@open-resume-builder/shared/types';
+import { SECTION_DEFINITIONS } from '@open-resume-builder/shared/types';
 import { useResumeStore } from '../../store/resumeStore';
-import type { ResumeSection } from '../../types';
-import { SECTION_DEFINITIONS } from '../../types';
 import AchievementsSection from './sections/AchievementsSection';
 import CertificationsSection from './sections/CertificationsSection';
 import EducationSection from './sections/EducationSection';
@@ -24,7 +24,7 @@ export default function SectionManager() {
   const { sections } = resume;
 
   const availableSections = Object.values(SECTION_DEFINITIONS).filter(
-    (def) => !sections.some((s) => s.id === def.id)
+    (def: any) => !sections.some((s: ResumeSection) => s.id === def.id)
   );
 
   const handleAddSection = (sectionId: string) => {
@@ -46,7 +46,7 @@ export default function SectionManager() {
       {/* Current Sections */}
       {sections.length > 0 && (
         <div className="space-y-4">
-          {sections.map((section) => {
+          {sections.map((section: ResumeSection) => {
             const Component = sectionComponents[section.id];
             return (
               <div key={section.id} className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-sm hover:shadow-md transition-shadow">

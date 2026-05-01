@@ -1,3 +1,4 @@
+import type { ResumeSection } from '@open-resume-builder/shared/types';
 import { useResumeStore } from '../../store/resumeStore';
 import { useTemplateStore } from '../../store/templateStore';
 import { getTemplate } from '../../templates';
@@ -43,7 +44,7 @@ export default function ResumePreview() {
   // Order sections based on template or use default
   const orderedSections = template.sectionOrder
     ? template.sectionOrder
-      .map((sectionId) => sections.find((s) => s.id === sectionId))
+      .map((sectionId: string) => sections.find((s: ResumeSection) => s.id === sectionId))
       .filter(Boolean)
     : sections;
 

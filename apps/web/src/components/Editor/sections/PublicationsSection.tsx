@@ -1,6 +1,6 @@
+import type { SectionItem } from '@open-resume-builder/shared/types';
 import { useState } from 'react';
 import { useResumeStore } from '../../../store/resumeStore';
-import type { SectionItem } from '../../../types';
 import TextField from '../../FormFields/TextField';
 
 interface PublicationsSectionProps {

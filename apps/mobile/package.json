@@ -5,7 +5,7 @@
   "description": "Open Resume Builder - Mobile Application (React Native Expo)",
   "scripts": {
     "dev": "expo start",
-    "build": "expo build",
+    "build": "tsc --noEmit",
     "build:android": "eas build --platform android",
     "build:ios": "eas build --platform ios",
     "lint": "eslint .",
@@ -32,7 +32,7 @@
     "@babel/preset-typescript": "^7.23.0",
     "@types/node": "^20.0.0",
     "@types/react": "^19.0.0-rc.0",
-    "@types/react-native": "^0.76.0",
+    "@types/react-native": "^0.72.0",
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "typescript": "~5.8.3"

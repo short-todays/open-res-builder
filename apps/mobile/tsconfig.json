@@ -12,12 +12,18 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
         "src/*"
       ],
       "@shared/*": [
+        "../../packages/shared/src/*"
+      ],
+      "@open-resume-builder/shared": [
+        "../../packages/shared/src"
+      ],
+      "@open-resume-builder/shared/*": [
         "../../packages/shared/src/*"
       ]
     }

@@ -1,7 +1,17 @@
+import type { PersonalInfo, Resume, ResumeSection, SectionItem } from '@open-resume-builder/shared/types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { PersonalInfo, Resume, ResumeSection, SectionItem } from '../types';
-import { DEFAULT_RESUME } from '../types';
+
+const DEFAULT_RESUME: Resume = {
+  personal: {
+    name: '',
+    email: '',
+    phone: '',
+    location: '',
+  },
+  summary: '',
+  sections: [],
+};
 
 interface ResumeStore {
   resume: Resume;
@@ -63,7 +73,7 @@ export const useResumeStore = create<ResumeStore>()(
         set((state) => ({
           resume: {
             ...state.resume,
-            sections: state.resume.sections.filter((s) => s.id !== sectionId),
+            sections: state.resume.sections.filter((s: ResumeSection) => s.id !== sectionId),
           },
         })),
 
@@ -122,9 +132,9 @@ export const useResumeStore = create<ResumeStore>()(
         set((state) => ({
           resume: {
             ...state.resume,
-            sections: state.resume.sections.map((s) =>
+            sections: state.resume.sections.map((s: ResumeSection) =>
               s.id === sectionId
-                ? { ...s, items: s.items.filter((item) => item.id !== itemId) }
+                ? { ...s, items: s.items.filter((item: SectionItem) => item.id !== itemId) }
                 : s
             ),
           },

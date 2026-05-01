@@ -29,15 +29,16 @@
       ],
       "@shared/*": [
         "../../packages/shared/src/*"
+      ],
+      "@open-resume-builder/shared": [
+        "../../packages/shared/src"
+      ],
+      "@open-resume-builder/shared/*": [
+        "../../packages/shared/src/*"
       ]
     }
   },
   "include": [
     "src"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
   ]
 }
