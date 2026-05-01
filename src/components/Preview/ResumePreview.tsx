@@ -1,135 +1,32 @@
 import { useResumeStore } from '../../store/resumeStore';
+import { useTemplateStore } from '../../store/templateStore';
+import { getTemplate } from '../../templates';
 
 export default function ResumePreview() {
   const { resume } = useResumeStore();
+  const { selectedTemplate } = useTemplateStore();
+  const template = getTemplate(selectedTemplate);
   const { personal, summary, sections } = resume;
 
   const renderSectionItem = (section: any, item: any) => {
-    // Experience
-    if (section.id === 'experience') {
-      return (
-        <div key={item.id} className="mb-5">
-          <div className="mb-1">
-            <p className="font-bold text-black">{item.company}</p>
-            <p className="text-black">{item.position}</p>
-          </div>
-          {(item.startDate || item.endDate) && (
-            <p className="text-black text-sm mb-2">
-              {item.startDate} {item.endDate ? `- ${item.endDate}` : ''}
-            </p>
-          )}
-          {item.description && (
-            <p className="text-black text-sm leading-relaxed whitespace-pre-wrap">{item.description}</p>
-          )}
-        </div>
-      );
-    }
+    // Use template's formatter if available
+    const lines = template.formatSectionItem(section, item);
 
-    // Projects
-    if (section.id === 'projects') {
-      return (
-        <div key={item.id} className="mb-5">
-          <div className="mb-1">
-            <p className="font-bold text-black">{item.name}</p>
-          </div>
-          {item.technologies && (
-            <p className="text-black text-sm mb-2">
-              Technologies: {item.technologies}
-            </p>
-          )}
-          {item.description && (
-            <p className="text-black text-sm leading-relaxed">{item.description}</p>
-          )}
-        </div>
-      );
-    }
-
-    // Education
-    if (section.id === 'education') {
-      return (
-        <div key={item.id} className="mb-5">
-          <div className="mb-1">
-            <p className="font-bold text-black">{item.school}</p>
-            <p className="text-black">{item.degree}</p>
-          </div>
-          {item.field && (
-            <p className="text-black text-sm mb-2">{item.field}</p>
-          )}
-          {item.graduationDate && (
-            <p className="text-black text-sm">
-              Graduation: {item.graduationDate}
-            </p>
-          )}
-        </div>
-      );
-    }
-
-    // Skills
-    if (section.id === 'skills') {
-      return (
-        <div key={item.id} className="mb-3">
-          <p className="font-bold text-black">{item.category}</p>
-          <p className="text-black text-sm">{item.items}</p>
-        </div>
-      );
-    }
-
-    // Certifications
-    if (section.id === 'certifications') {
-      return (
-        <div key={item.id} className="mb-4">
-          <p className="font-bold text-black">{item.name}</p>
-          {item.issuer && (
-            <p className="text-black text-sm">{item.issuer}</p>
-          )}
-          {item.date && (
-            <p className="text-black text-sm">
-              {item.date}
-            </p>
-          )}
-        </div>
-      );
-    }
-
-    // Achievements
-    if (section.id === 'achievements') {
-      return (
-        <div key={item.id} className="mb-4">
-          <p className="font-bold text-black">{item.title}</p>
-          {item.description && (
-            <p className="text-black text-sm leading-relaxed mt-1">{item.description}</p>
-          )}
-        </div>
-      );
-    }
-
-    // Publications
-    if (section.id === 'publications') {
-      return (
-        <div key={item.id} className="mb-4">
-          <p className="font-bold text-black">{item.title}</p>
-          {item.publisher && (
-            <p className="text-black text-sm">{item.publisher}</p>
-          )}
-          {item.date && (
-            <p className="text-black text-sm">
-              {item.date}
-            </p>
-          )}
-        </div>
-      );
-    }
-
-    // Fallback
     return (
-      <div key={item.id} className="mb-3">
-        {Object.entries(item)
-          .filter(([key, value]) => key !== 'id' && value)
-          .map(([key, value]) => (
-            <p key={key} className="text-sm text-black mb-1">
-              <strong>{key}:</strong> {String(value)}
+      <div key={item.id} className="mb-4">
+        {lines.map((line, idx) => {
+          // Detect bold lines (like company, position, degree)
+          const isBold = idx === 0 || line.includes('—') || line.includes('|');
+          return (
+            <p
+              key={idx}
+              className={`text-black text-sm leading-relaxed whitespace-pre-wrap ${isBold ? 'font-bold' : ''
+                }`}
+            >
+              {line}
             </p>
-          ))}
+          );
+        })}
       </div>
     );
   };
@@ -142,6 +39,13 @@ export default function ResumePreview() {
   ]
     .filter(Boolean)
     .join(' | ');
+
+  // Order sections based on template or use default
+  const orderedSections = template.sectionOrder
+    ? template.sectionOrder
+      .map((sectionId) => sections.find((s) => s.id === sectionId))
+      .filter(Boolean)
+    : sections;
 
   return (
     <div className="flex flex-col h-full overflow-hidden bg-gray-50 dark:bg-slate-800">
@@ -166,7 +70,7 @@ export default function ResumePreview() {
           )}
 
           {/* Sections */}
-          {sections
+          {(orderedSections as any[])
             .filter((section) => section.visible && section.items.length > 0)
             .map((section) => (
               <section key={section.id} className="mb-6">
@@ -180,7 +84,7 @@ export default function ResumePreview() {
             ))}
 
           {/* Empty state */}
-          {sections.filter((s) => s.visible && s.items.length > 0).length === 0 && !summary && (
+          {(orderedSections as any[]).filter((s) => s.visible && s.items.length > 0).length === 0 && !summary && (
             <div className="text-center py-12 text-gray-400">
               <p>Start adding content to see your resume preview</p>
             </div>
