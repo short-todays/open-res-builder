@@ -1,29 +1,23 @@
 {
-  "name": "open-resume-builder",
+  "name": "open-resume-builder-monorepo",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "Monorepo for Open Resume Builder - Web and Mobile",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "dev": "pnpm -r --parallel dev",
+    "dev:web": "pnpm --filter @open-resume-builder/web dev",
+    "dev:mobile": "pnpm --filter @open-resume-builder/mobile dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter @open-resume-builder/web build",
+    "build:mobile": "pnpm --filter @open-resume-builder/mobile build",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check",
+    "preview": "pnpm --filter @open-resume-builder/web preview"
   },
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@vitejs/plugin-react": "^4.6.0",
-    "eslint": "^9.30.1",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.35.1",
-    "vite": "^7.0.4"
+    "typescript": "~5.8.3"
+  },
+  "engines": {
+    "pnpm": ">=8.0.0"
   }
 }
