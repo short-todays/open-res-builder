@@ -6,7 +6,7 @@ import ResumePreview from './components/Preview/ResumePreview';
 import { useThemeStore } from './store/themeStore';
 
 export default function App() {
-  const [previewWidth, setPreviewWidth] = useState(50);
+  const [previewWidth, setPreviewWidth] = useState(65);
   const { theme } = useThemeStore();
 
   useEffect(() => {
@@ -53,8 +53,12 @@ export default function App() {
         {/* Divider */}
         <div
           onMouseDown={handleMouseDown}
-          className="w-1 bg-gray-200 dark:bg-slate-700 hover:bg-primary-500 dark:hover:bg-primary-400 cursor-col-resize transition-colors"
-        />
+          className="w-2 bg-gray-200 dark:bg-slate-700 hover:bg-primary-500 dark:hover:bg-primary-400 cursor-col-resize flex flex-col items-center justify-center gap-2 transition-colors"
+        >
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
+        </div>
 
         {/* Preview */}
         <div style={{ width: `${previewWidth}%` }} className="flex flex-col overflow-hidden bg-gray-100 dark:bg-slate-900">
