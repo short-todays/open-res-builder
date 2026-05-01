@@ -1,11 +1,15 @@
 import { useResumeStore } from '../store/resumeStore';
 import ThemeToggle from './ThemeToggle';
+import { downloadResumePDF } from '../utils/pdfExport';
 
 export default function Header() {
-  const { resetResume } = useResumeStore();
+  const { resume, resetResume } = useResumeStore();
 
   const handleDownloadPDF = () => {
-    alert('PDF export coming soon!');
+    const filename = resume.personal.name
+      ? resume.personal.name.replace(/\s+/g, '-') + '-Resume'
+      : 'Resume';
+    downloadResumePDF({ filename, resume });
   };
 
   const handleReset = () => {
